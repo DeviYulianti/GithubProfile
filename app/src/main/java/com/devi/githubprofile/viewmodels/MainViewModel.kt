@@ -24,7 +24,8 @@ class MainViewModel : ViewModel(){
         _isLoading.value = true
         Log.d(TAG, "getDataUserProfileFromAPI: start...")
         val githubUserService: GithubUserService = ServiceBuilder.buildService(GithubUserService::class.java)
-        val requestCall: Call<GithubUser> = githubUserService.loginUser(query)
+        val requestCall: Call<GithubUser> =
+            githubUserService.loginUser(Config.PERSONAL_ACCESS_TOKEN, query)
         Log.d(TAG, "getDataUserFromAPI: ${requestCall.request().url}")
         requestCall.enqueue(object : retrofit2.Callback<GithubUser> {
             override fun onResponse(call: Call<GithubUser>, response: retrofit2.Response<GithubUser>) {
